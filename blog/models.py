@@ -27,3 +27,12 @@ class Post(models.Model):
         choices=Status,
         default=Status.DRAFT
     )
+
+    published = PublishedManager()
+
+    class Meta:
+        ordering = ['-publish']
+        indexes = [ models.Index(fields=['-publish']), ]
+
+    def __str__(self):
+        return self.title
